@@ -14,7 +14,7 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
           type: 'mssql',
           host: 'localhost',
           username: 'sa',
-          password: 'Kia@123',
+          password: '123456',
           database: 'travel',
           port: 1433,
           synchronize: true,
