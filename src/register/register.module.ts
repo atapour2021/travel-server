@@ -5,8 +5,8 @@ import { RegisterEntity } from './register.entity';
 import { RegisterService } from './register.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([RegisterEntity])],
-    controllers: [RegisterController],
-    providers: [RegisterService],
+  imports: [TypeOrmModule.forFeature([RegisterEntity])],
+  controllers: [RegisterController],
+  providers: [RegisterService],
 })
-export class RegisterModule { }
+export class RegisterModule {}
