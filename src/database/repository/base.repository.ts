@@ -1,9 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { BaseEntity } from '../model/base.model';
+import { BaseModel } from '../model/base.model';
 
 @Injectable()
-export class BaseRepository<T extends BaseEntity> {
+export class BaseRepository<T extends BaseModel> {
   constructor(private readonly repository: Repository<T>) {}
 
   async findAll(): Promise<T[]> {
