@@ -1,48 +1,31 @@
 import { Module } from '@nestjs/common';
-// import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-// import { ENV_CONSTANTS } from '../env.constants';
+import { ENV_CONSTANTS } from '../env.constants';
 
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
-      // imports: [ConfigModule.forRoot()],
-      // configService: ConfigService
-
       useFactory: (): TypeOrmModuleOptions => {
         return {
           type: 'mssql',
-          host: 'localhost',
-          username: 'sa',
-          password: 'Kia@123',
-          database: 'travel',
-          port: 1433,
+          host: ENV_CONSTANTS.TYPEORM_HOST,
+          username: ENV_CONSTANTS.TYPEORM_USERNAME,
+          password: ENV_CONSTANTS.TYPEORM_PASSWORD,
+          database: ENV_CONSTANTS.TYPEORM_DATABASE,
+          port: ENV_CONSTANTS.TYPEORM_PORT,
           synchronize: true,
-          entities: ['dist/**/*.entity{.ts,.js}'],
+          entities: [ENV_CONSTANTS.TYPEORM_ENTITIES],
           options: {
-            encrypt: true,
-            enableArithAbort: true,
+            encrypt: ENV_CONSTANTS.TYPEORM_ENCRYPT,
+            enableArithAbort: ENV_CONSTANTS.TYPEORM_ENABLEARITHABORT,
           },
           extra: {
-            trustServerCertificate: true,
+            trustServerCertificate:
+              ENV_CONSTANTS.TYPEORM_TRUSTSERVERCERTIFICATE,
           },
         };
       },
-      // inject: [ConfigService],
     }),
   ],
 })
 export class DatabaseModule {}
-
-// type: 'mssql',
-// host: configService.get<string>(ENV_CONSTANTS.TYPEORM_HOST),
-// username: configService.get<string>(ENV_CONSTANTS.TYPEORM_USERNAME),
-// password: configService.get<string>(ENV_CONSTANTS.TYPEORM_PASSWORD),
-// database: configService.get<string>(ENV_CONSTANTS.TYPEORM_DATABASE),
-// port: Number(configService.get<string>(ENV_CONSTANTS.TYPEORM_PORT)),
-// entities: [configService.get<string>(ENV_CONSTANTS.TYPEORM_ENTITIES)],
-// synchronize: true,
-// options: { enableArithAbort: true, encrypt: true },
-// extra: {
-//   trustServerCertificate: true,
-// },

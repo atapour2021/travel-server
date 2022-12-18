@@ -1,29 +1,24 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { BaseDTO } from 'src/database/dto/base.dto';
 
-export class CreateUserDto {
-  readonly id: number;
+export class CreateUserDto extends BaseDTO {
+  @ApiProperty()
+  @ApiPropertyOptional({
+    type: String,
+  })
+  name: string;
 
   @ApiProperty()
   @ApiPropertyOptional({
     type: String,
   })
-  fullName: string;
+  family: string;
 
   @ApiProperty()
   @ApiPropertyOptional({
-    type: String,
+    type: Number,
   })
-  phone: string;
-
-  @ApiProperty()
-  @ApiPropertyOptional({
-    type: String,
-  })
-  email: string;
-
-  @ApiProperty()
-  @ApiPropertyOptional({
-    type: String,
-  })
-  country: string;
+  age: number;
 }
+
+export class UpdateUserDto extends CreateUserDto {}
