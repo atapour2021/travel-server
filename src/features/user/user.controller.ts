@@ -6,8 +6,9 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { UserService } from './user.service';
 
@@ -17,8 +18,13 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  public async findAll() {
-    return this.userService.findAll();
+  @ApiQuery({
+    name: 'name',
+    required: false,
+    type: String,
+  })
+  public async findByFilter(@Query() query: { name: string }) {
+    return this.userService.findByFilter(query);
   }
 
   @Get(':id')
