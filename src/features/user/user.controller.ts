@@ -39,25 +39,25 @@ export class UserController {
     type: Date,
   })
   public async findByFilter(@Query() query: UserFilterDto) {
-    return this.userService.findByFilter(query);
+    return await this.userService.findByFilter(query);
   }
 
   @Get(':id')
   public async findById(@Param('id') id: number) {
-    return this.userService.findById(id);
+    return await this.userService.findById(id);
   }
   @Post()
   public async create(@Body() user: CreateUserDto) {
-    return this.userService.insert(user);
+    return await this.userService.insert(user);
   }
 
   @Put(':id')
   public async update(@Param('id') id: number, @Body() user: UpdateUserDto) {
-    return this.userService.update(id, user);
+    return await this.userService.update(id, user);
   }
 
   @Delete(':id')
   public async delete(@Param('id') id: number) {
-    return this.userService.delete(id);
+    return await this.userService.delete(id);
   }
 }
