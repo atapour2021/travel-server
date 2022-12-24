@@ -22,3 +22,10 @@ export class CreateUserDto extends BaseDTO {
 }
 
 export class UpdateUserDto extends CreateUserDto {}
+
+export class UserFilterDto {
+  name: string;
+  family: string;
+  from: Date;
+  to: Date;
+}

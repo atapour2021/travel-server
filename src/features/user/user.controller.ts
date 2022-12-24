@@ -9,7 +9,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
-import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
+import { CreateUserDto, UpdateUserDto, UserFilterDto } from './dto/user.dto';
 import { UserService } from './user.service';
 
 @ApiTags('User')
@@ -23,7 +23,22 @@ export class UserController {
     required: false,
     type: String,
   })
-  public async findByFilter(@Query() query: { name: string }) {
+  @ApiQuery({
+    name: 'family',
+    required: false,
+    type: String,
+  })
+  @ApiQuery({
+    name: 'from',
+    required: false,
+    type: Date,
+  })
+  @ApiQuery({
+    name: 'to',
+    required: false,
+    type: Date,
+  })
+  public async findByFilter(@Query() query: UserFilterDto) {
     return this.userService.findByFilter(query);
   }
 
