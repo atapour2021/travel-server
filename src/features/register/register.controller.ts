@@ -43,7 +43,6 @@ export class RegisterController {
   }
   @Post()
   public async create(@Body() register: CreateRegisterDto) {
-    console.log(register)
     return this.registerService.insert(register);
   }
 }

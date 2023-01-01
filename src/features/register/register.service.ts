@@ -22,7 +22,6 @@ export class RegisterService extends BaseRepository<RegisterEntity> {
     const to = data.to ? data.to : new Date();
     const from = data.from ? data.from : this.getPreviousYear(new Date());
     const isChecked = data.isChecked !== undefined ? data.isChecked : null;
-    console.log(data)
 
     const query = {
       fullName: Like(`%${fullName}%`),
