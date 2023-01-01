@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BaseRepository } from 'src/database/repository/base.repository';
 import { Repository } from 'typeorm';
 import { UserEntity } from './user.entity';
 import { Like, Between } from 'typeorm';
-import { UserFilterDto } from './dto/user.dto';
+import { UpdateUserAgeDto, UserFilterDto } from './dto/user.dto';
 
 @Injectable()
 export class UserService extends BaseRepository<UserEntity> {
@@ -37,4 +37,31 @@ export class UserService extends BaseRepository<UserEntity> {
     clone.setMonth(date.getMonth() - 12);
     return clone;
   };
+
+  async updateUserAge(id: number, data: UpdateUserAgeDto): Promise<UserEntity> {
+    const user: UserEntity = await this.userRepository.findOne({
+      where: { id: id },
+    });
+    if (!user) {
+      throw new HttpException(
+        {
+          message: 'user not found',
+        },
+        HttpStatus.NOT_FOUND,
+      );
+    } else {
+      try {
+        user.UpdatedDate = new Date();
+        user.age = data.age;
+        return await this.userRepository.save(user);
+      } catch (error) {
+        throw new HttpException(
+          {
+            message: error,
+          },
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+    }
+  }
 }

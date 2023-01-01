@@ -29,3 +29,11 @@ export class UserFilterDto {
   from: Date;
   to: Date;
 }
+
+export class UpdateUserAgeDto {
+  @ApiProperty()
+  @ApiPropertyOptional({
+    type: Number,
+  })
+  age: number;
+}
