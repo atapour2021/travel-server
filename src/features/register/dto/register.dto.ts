@@ -25,4 +25,20 @@ export class CreateRegisterDto extends BaseDTO {
     type: String,
   })
   country: string;
+
+  @ApiProperty()
+  @ApiPropertyOptional({
+    type: Boolean,
+  })
+  isChecked: boolean;
+}
+export class UpdateRegisterDto extends CreateRegisterDto {}
+
+export class RegisterFilterDto {
+  fullName: string;
+  phone: string;
+  email: string;
+  from: Date;
+  to: Date;
+  isChecked: boolean;
 }
