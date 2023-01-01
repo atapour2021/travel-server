@@ -4,12 +4,18 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Query,
 } from '@nestjs/common';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
-import { CreateUserDto, UpdateUserDto, UserFilterDto } from './dto/user.dto';
+import {
+  CreateUserDto,
+  UpdateUserAgeDto,
+  UpdateUserDto,
+  UserFilterDto,
+} from './dto/user.dto';
 import { UserService } from './user.service';
 
 @ApiTags('User')
@@ -54,6 +60,11 @@ export class UserController {
   @Put(':id')
   public async update(@Param('id') id: number, @Body() user: UpdateUserDto) {
     return await this.userService.update(id, user);
+  }
+
+  @Patch(':id')
+  public async patch(@Param('id') id: number, @Body() body: UpdateUserAgeDto) {
+    return await this.userService.updateUserAge(id, body);
   }
 
   @Delete(':id')
