@@ -1,10 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BaseRepository } from 'src/database/repository/base.repository';
-import { Repository } from 'typeorm';
-import { UserEntity } from './user.entity';
-import { Like, Between } from 'typeorm';
+import { Between, Like, Repository } from 'typeorm';
 import { UpdateUserAgeDto, UserFilterDto } from './dto/user.dto';
+import { UserEntity } from './user.entity';
 
 @Injectable()
 export class UserService extends BaseRepository<UserEntity> {

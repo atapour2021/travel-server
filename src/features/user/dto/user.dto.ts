@@ -1,4 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsString, IsInt } from '@nestjs/class-validator';
 import { BaseDTO } from 'src/database/dto/base.dto';
 
 export class CreateUserDto extends BaseDTO {
@@ -6,18 +7,21 @@ export class CreateUserDto extends BaseDTO {
   @ApiPropertyOptional({
     type: String,
   })
+  @IsString()
   name: string;
 
   @ApiProperty()
   @ApiPropertyOptional({
     type: String,
   })
+  @IsString()
   family: string;
 
   @ApiProperty()
   @ApiPropertyOptional({
     type: Number,
   })
+  @IsInt()
   age: number;
 }
 
